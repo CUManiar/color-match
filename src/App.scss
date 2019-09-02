@@ -1,0 +1,58 @@
+.App {
+  text-align: center;
+}
+
+#game-window {
+  display: block;
+  float: left;
+  border: 1px solid #ccc;
+  height: 75vh;
+  margin: 1rem;
+
+  #user {
+    display: inline-flex;
+    margin: 15px;
+  }
+}
+
+#game-console {
+  float: left;
+  border: 1px solid #ccc;
+  height: 75vh;
+  margin: 1rem;
+  padding: 0;
+
+  #game-header {
+    background: aliceblue;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #color-boxes {
+    display: flex;
+    justify-content: center;
+  }
+
+  #given-color {
+    border: 1px solid #ccc;
+    width: fit-content;
+    padding: 15px;
+    margin: 10px;
+  }
+
+  #match-color {
+    border: 1px solid #ccc;
+    width: fit-content;
+    padding: 15px;
+    margin: 10px;
+  }
+}
+
+#score-window {
+  float: right;
+  display: block;
+  height: 75vh;
+  border: 1px solid #ccc;
+  margin: 1rem;
+}
