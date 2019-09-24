@@ -68,9 +68,6 @@ function selectWindow(user) {
   } else {
     user_window.style.display = "none";
     game_window.style.display = "block";
-    alert(
-      " How to Play? \n 1. Some color name is given in card1(above) and some color name is given in card2(below) \n 2. Colour of the text in card2 is different \n 3. You have check if the color given in card1 and the color of the text in card2 is same or not!"
-    );
     timer_Count();
     _setCardColorValues();
   }
@@ -110,9 +107,6 @@ function localStorageInit() {
 function main() {
   selectWindow(displayUser.value);
   if (game_window.style.display === "block") {
-    // alert(
-    //   " How to Play? \n 1. Some color name is given in card1(above) and some color name is given in card2(below) \n 2. Colour of the text in card2 is different \n 3. You have check if the color given in card1 and the color of the text in card2 is same or not!"
-    // );
     timer_Count();
     _setCardColorValues();
   }
