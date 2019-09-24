@@ -1,7 +1,7 @@
 var colors = ["red", "blue", "green", "brown", "magenta", "black", "violet"];
 var score = 0;
 var username = "";
-var game_time = 30;
+var game_time = 10;
 
 var color_text = document.getElementById("color-text");
 var color_font = document.getElementById("color-font");
@@ -13,8 +13,15 @@ var timer_value = document.getElementById("time");
 var high_score_table = document.getElementById("highestScores");
 
 function highScoreTable() {
+  if (JSON.parse(localStorage.getItem("score_arr")) === null) {
+    localStorage.setItem("score_arr", JSON.stringify([]));
+    return;
+  }
   var list = JSON.parse(localStorage.getItem("score_arr"));
-  list = list.sort((a, b) => b.score - a.score);
+  list =
+    list !== null && list.length > 0
+      ? list.sort((a, b) => b.score - a.score)
+      : [];
   var count = 0;
   for (let i = 0; i < list.length; i++) {
     if (count < 10) {
@@ -39,6 +46,7 @@ function timer_Count() {
       var scoreInfo = { user: username, score: score };
       list.push(scoreInfo);
       localStorage.setItem("score_arr", JSON.stringify(list));
+      highScoreTable();
       location.reload();
     } else {
       timer_value.innerHTML = game_time + " sec";
@@ -97,12 +105,12 @@ function localStorageInit() {
 }
 
 function main() {
-  highScoreTable();
   selectWindow(displayUser.value);
   if (game_window.style.display === "block") {
     timer_Count();
     _setCardColorValues();
   }
+  highScoreTable();
 }
 
 window.onloadstart = localStorageInit();
