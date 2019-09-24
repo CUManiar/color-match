@@ -7,8 +7,8 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="stylesheet" href="index.css" />
-    <link rel="icon" href="./favicon_io/favicon.ico">
+
+    <link rel="icon" href="./favicon_io/favicon.ico" />
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -16,72 +16,99 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-
-    <title> Color Match </title>
+    <link rel="stylesheet" href="index.css" />
+    <title>Color Match</title>
   </head>
   <body>
     <div class="container-fluid">
       <div class="row justify-content-center">
-        <h3 id="game-header"> Welcome to Game Arena </h3>
+        <h3 id="game-header">Welcome to Game Arena</h3>
       </div>
       <div class="row justify-content-center">
-
         <!-- Interaction Windows -->
-        <div class="col-sm-7 p-0 m-2 heigth interaction-window">
+        <div class="col-sm-7 p-0 m-2 height mw-90 interaction-window">
           <div class="header bg-light text-center">
-            <span class="pl-3 text-gray float-left font-weight-bold">Timer : <span id="time">00 sec</span></span>
+            <span class="pl-3 text-gray float-left font-weight-bold"
+              >Timer : <span id="time">00 sec</span></span
+            >
             <span class="text-gray font-weight-bold" id="user"></span>
             <span class="float-right pr-3 text-gray font-weight-bold"
-              >Score :
-              <span id="score">0</sapn
-            ></span>
+              >Score : <span id="score">0</span></span
+            >
           </div>
 
           <!-- User Window -->
           <div class="mt-10" id="user-window">
             <div class="row justify-content-center">
-                <input id="username" type="text" placeholder="Enter your name" class="p-2 m-3 w-50 col-sm-3 border-bottom font-weight-bold">
+              <input
+                id="username"
+                type="text"
+                placeholder="Enter your name"
+                class="p-2 m-3 w-50 col-sm-3 border-bottom font-weight-bold"
+              />
             </div>
             <div class="row justify-content-center">
-                <button class="btn btn-primary" style="width: 8rem;" onclick="getUserName()"> Start </button>
+              <button
+                class="btn btn-primary mb-5"
+                style="width: 8rem;"
+                onclick="getUserName()"
+              >
+                Start
+              </button>
+            </div>
+            <div class="row m-2 p-2 game-info">
+              <h2>How to Play?</h2>
+              <ul>
+                <li>
+                  Some color name is given in card1(above) and some color name
+                  is given in card2(below)
+                </li>
+                <li>Colour of the text in card2 is different</li>
+                <li>
+                  You have check if the color given in card1 and the color of
+                  the text in card2 is same or not!
+                </li>
+              </ul>
             </div>
           </div>
 
           <!-- Game Window -->
           <div id="game-window">
-              <div class="row justify-content-center">
-                  <div
-                    id="color-text"
-                    class="color-text shadow p-5 border mt-5 mb-3 text-uppercase col-md-3 text-center font-weight-bold bg-white"
-                  ></div>
-                </div>
-                <div class="row justify-content-center">
-                    <div
-                      class="color-font shadow p-5 border m-1 text-uppercase col-md-3 text-center font-weight-bold bg-white"
-                      id="color-font"
-                    ></div>
-                  </div>
-                  <div class="row justify-content-around">
-                      <button class="btn btn-danger w-25 m-3" onclick="scoreCount(false)">
-                        No
-                      </button>
-                      <button
-                        class="btn btn-success w-25 m-3 float-right"
-                        onclick="scoreCount(true)"
-                      >
-                        Yes
-                      </button>
-                    </div>
+            <div class="row justify-content-center">
+              <div
+                id="color-text"
+                class="color-text shadow p-5 border mt-5 mb-3 text-uppercase col-md-3 text-center font-weight-bold bg-white"
+              ></div>
+            </div>
+            <div class="row justify-content-center">
+              <div
+                class="color-font shadow p-5 border m-1 text-uppercase col-md-3 text-center font-weight-bold bg-white"
+                id="color-font"
+              ></div>
+            </div>
+            <div class="row justify-content-around">
+              <button
+                class="btn btn-danger w-25 m-3"
+                onclick="scoreCount(false)"
+              >
+                No
+              </button>
+              <button
+                class="btn btn-success w-25 m-3 float-right"
+                onclick="scoreCount(true)"
+              >
+                Yes
+              </button>
+            </div>
           </div>
         </div>
-        
+
         <!-- High Score Windows -->
         <div class="col-sm-3 m-2  p-0 text-center score-window">
           <div class="header p-2 bg-light">
             <span class="text-gray font-weight-bold">High Scores</span>
           </div>
-          <div id="highestScores" class="m-3">
-          </div>
+          <div id="highestScores" class="m-3"></div>
         </div>
       </div>
     </div>

@@ -31,8 +31,17 @@ body {
   color: gray;
 }
 
-.heigth {
-  height: 87vh;
+.game-info {
+  background-color: lightblue;
+  border: 1px solid lightblue;
+  border-radius: 5px;
+  font-weight: bold;
+  bottom: 0;
+}
+
+.height {
+  min-height: 87vh;
+  height: 100%;
 }
 
 #username {
