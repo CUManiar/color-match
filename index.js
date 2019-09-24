@@ -1,8 +1,15 @@
+/*
+ * @2019 All rights are reserved
+ * ${author} Chiragkumar Maniyar
+ */
+
+// Colors and variable declarations
 var colors = ["red", "blue", "green", "brown", "magenta", "black", "violet"];
 var score = 0;
 var username = "";
 var game_time = 30;
 
+// Elements list need to be interacted with
 var color_text = document.getElementById("color-text");
 var color_font = document.getElementById("color-font");
 var style_font = document.getElementById("color-font");
@@ -12,6 +19,9 @@ var game_window = document.getElementById("game-window");
 var timer_value = document.getElementById("time");
 var high_score_table = document.getElementById("highestScores");
 
+/**
+ * Manages High Score table
+ */
 function highScoreTable() {
   if (JSON.parse(localStorage.getItem("score_arr")) === null) {
     localStorage.setItem("score_arr", JSON.stringify([]));
@@ -36,6 +46,9 @@ function highScoreTable() {
   }
 }
 
+/**
+ * Timer function
+ */
 function timer_Count() {
   var timer = setInterval(countdown, 1000);
   function countdown() {
@@ -55,12 +68,20 @@ function timer_Count() {
   }
 }
 
+/**
+ * Sets and updates value and color of card text
+ */
 function _setCardColorValues() {
   color_text.innerHTML = getRandomColor();
   color_font.innerHTML = getRandomColor();
   style_font.innerHTML = getRandomColor();
 }
 
+/**
+ *
+ * @param {String} user username
+ * Selects window to display based on user's name     available or not
+ */
 function selectWindow(user) {
   if (user === "" || user === null || user === undefined) {
     game_window.style.display = "none";
@@ -73,10 +94,18 @@ function selectWindow(user) {
   }
 }
 
+/**
+ * Generates random colours from colour array
+ */
 function getRandomColor() {
   return colors[Math.floor((Math.random() * colors.length) / 2)];
 }
 
+/**
+ *
+ * @param {Boolean} answer Event passes boolean value
+ * Manages score while game is on!
+ */
 function scoreCount(answer) {
   var color_text = document.getElementById("color-text").innerHTML;
   var color_font = document.getElementById("color-font").style.color;
@@ -87,6 +116,9 @@ function scoreCount(answer) {
   document.getElementById("color-font").style.color = getRandomColor();
 }
 
+/**
+ * Collects user name
+ */
 function getUserName() {
   let user = document.getElementById("username").value;
   username =
@@ -97,6 +129,9 @@ function getUserName() {
   selectWindow(displayUser.innerHTML);
 }
 
+/**
+ * Handles local storage data
+ */
 function localStorageInit() {
   localStorage.setItem(
     "Color-Match",
@@ -104,6 +139,9 @@ function localStorageInit() {
   );
 }
 
+/**
+ * Everything starts from here!!!!!!
+ */
 function main() {
   selectWindow(displayUser.value);
   if (game_window.style.display === "block") {
@@ -113,5 +151,8 @@ function main() {
   highScoreTable();
 }
 
+/**
+ * Commands to manage what to do when!?
+ */
 window.onloadstart = localStorageInit();
 window.onload = main();
