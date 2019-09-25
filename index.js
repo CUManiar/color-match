@@ -4,7 +4,7 @@
  */
 
 // Colors and variable declarations
-var colors = ["red", "blue", "green", "brown", "magenta", "black", "violet"];
+var colors = ["red", "blue", "green", "brown", "magenta", "violet"];
 var score = 0;
 var username = "";
 var game_time = 30;
@@ -18,6 +18,21 @@ var user_window = document.getElementById("user-window");
 var game_window = document.getElementById("game-window");
 var timer_value = document.getElementById("time");
 var high_score_table = document.getElementById("highestScores");
+var answerNo = document.getElementById("no-btn");
+var answerYes = document.getElementById("yes-btn");
+
+/**
+ * Debounce will restric user click unlawfully
+ */
+const debounce = (func, delay) => {
+  let debounceTimer;
+  return function() {
+    const context = this;
+    const args = arguments;
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => func.apply(context, args), delay);
+  };
+};
 
 /**
  * Manages High Score table
@@ -73,8 +88,8 @@ function timer_Count() {
  */
 function _setCardColorValues() {
   color_text.innerHTML = getRandomColor();
+  style_font.style.color = getRandomColor();
   color_font.innerHTML = getRandomColor();
-  style_font.innerHTML = getRandomColor();
 }
 
 /**
@@ -106,15 +121,43 @@ function getRandomColor() {
  * @param {Boolean} answer Event passes boolean value
  * Manages score while game is on!
  */
-function scoreCount(answer) {
-  var color_text = document.getElementById("color-text").innerHTML;
-  var color_font = document.getElementById("color-font").style.color;
+const scoreCount = (answer, text, text_color) => {
   document.getElementById("score").innerHTML =
-    (color_text === color_font) === answer ? (score += 100) : (score -= 50);
-  document.getElementById("color-text").innerHTML = getRandomColor();
-  document.getElementById("color-font").innerHTML = getRandomColor();
-  document.getElementById("color-font").style.color = getRandomColor();
-}
+    (text === text_color) === answer ? (score += 100) : (score -= 200);
+};
+
+/**
+ * Get current text of card1 and color of font card2
+ */
+const getCardValues = id => {
+  return document.getElementById(id).innerHTML;
+};
+
+/**
+ * Event listner for score counting
+ */
+answerNo.addEventListener(
+  "click",
+  debounce(function() {
+    var color_text = getCardValues("color-text");
+    var color_font = getCardValues("color-font");
+    scoreCount(false, color_text, color_font);
+    _setCardColorValues();
+  })
+);
+
+/**
+ * Event listner for score counting
+ */
+answerYes.addEventListener(
+  "click",
+  debounce(function() {
+    var color_text = getCardValues("color-text");
+    var color_font = getCardValues("color-font");
+    scoreCount(true, color_text, color_font);
+    _setCardColorValues();
+  })
+);
 
 /**
  * Collects user name
