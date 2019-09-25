@@ -149,7 +149,7 @@ answerNo.addEventListener(
     var color_font = getCardValues("color-font").style.color;
     scoreCount(false, color_text, color_font);
     _setCardColorValues();
-  }, 250)
+  }, 100)
 );
 
 /**
@@ -162,7 +162,7 @@ answerYes.addEventListener(
     var color_font = getCardValues("color-font").style.color;
     scoreCount(true, color_text, color_font);
     _setCardColorValues();
-  }, 250)
+  }, 100)
 );
 
 /**
