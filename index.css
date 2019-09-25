@@ -41,6 +41,11 @@ body {
   border-radius: 5px;
   font-weight: bold;
   bottom: 0;
+  font-family: cursive;
+}
+
+.score-window {
+  font-family: cursive;
 }
 
 .height {
