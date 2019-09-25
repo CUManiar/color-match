@@ -68,7 +68,12 @@ function timer_Count() {
   var timer = setInterval(countdown, 1000);
   function countdown() {
     if (game_time < 0) {
-      alert("Game Over! \n Your Score : " + score);
+      score > 1000
+        ? alert("Congratulations! You Rocked \n Your Score : " + score)
+        : alert(
+            "Keep playing! You will definately nail it! \n Your Score : " +
+              score
+          );
       clearTimeout(timer);
       var list = JSON.parse(localStorage.getItem("score_arr"));
       var scoreInfo = { user: username, score: score };
@@ -88,6 +93,7 @@ function timer_Count() {
  */
 function _setCardColorValues() {
   color_text.innerHTML = getRandomColor();
+  color_text.style.color = getRandomColor();
   style_font.style.color = getRandomColor();
   color_font.innerHTML = getRandomColor();
 }
@@ -98,7 +104,7 @@ function _setCardColorValues() {
  * Selects window to display based on user's name     available or not
  */
 function selectWindow(user) {
-  if (user === "" || user === null || user === undefined) {
+  if (user === "" || user === null || user === undefined || user.length < 3) {
     game_window.style.display = "none";
     user_window.style.display = "block";
   } else {
@@ -130,7 +136,7 @@ const scoreCount = (answer, text, text_color) => {
  * Get current text of card1 and color of font card2
  */
 const getCardValues = id => {
-  return document.getElementById(id).innerHTML;
+  return document.getElementById(id);
 };
 
 /**
@@ -139,8 +145,8 @@ const getCardValues = id => {
 answerNo.addEventListener(
   "click",
   debounce(function() {
-    var color_text = getCardValues("color-text");
-    var color_font = getCardValues("color-font");
+    var color_text = getCardValues("color-text").innerHTML;
+    var color_font = getCardValues("color-font").style.color;
     scoreCount(false, color_text, color_font);
     _setCardColorValues();
   })
@@ -152,8 +158,8 @@ answerNo.addEventListener(
 answerYes.addEventListener(
   "click",
   debounce(function() {
-    var color_text = getCardValues("color-text");
-    var color_font = getCardValues("color-font");
+    var color_text = getCardValues("color-text").innerHTML;
+    var color_font = getCardValues("color-font").style.color;
     scoreCount(true, color_text, color_font);
     _setCardColorValues();
   })
@@ -164,11 +170,14 @@ answerYes.addEventListener(
  */
 function getUserName() {
   let user = document.getElementById("username").value;
-  username =
-    user !== null && user.length > 1
-      ? user
-      : alert(" User name can not be empty  . . .");
-  displayUser.innerHTML = user;
+  if (user !== "" && user.length > 2) {
+    username = user;
+    displayUser.innerHTML = user;
+  } else if (user === "") {
+    return alert("Username can not be empty!");
+  } else {
+    return alert("Username should be at least 3 characters!");
+  }
   selectWindow(displayUser.innerHTML);
 }
 
