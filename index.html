@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="index.css" />
     <title>Color Match</title>
   </head>
+
   <body>
     <div class="container-fluid">
       <div class="row justify-content-center">
@@ -91,16 +92,8 @@
               ></div>
             </div>
             <div class="row justify-content-around">
-              <button
-                class="btn btn-danger w-25 m-3"
-                onclick="scoreCount(false)"
-              >
-                No
-              </button>
-              <button
-                class="btn btn-success w-25 m-3 float-right"
-                onclick="scoreCount(true)"
-              >
+              <button id="no-btn" class="btn btn-danger w-25 m-3">No</button>
+              <button id="yes-btn" class="btn btn-success w-25 m-3 float-right">
                 Yes
               </button>
             </div>
