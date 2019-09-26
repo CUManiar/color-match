@@ -22,7 +22,41 @@ var answerNo = document.getElementById("no-btn");
 var answerYes = document.getElementById("yes-btn");
 
 /**
- * Debounce will restric user click unlawfully
+ *
+ * @param {Boolean} answer Event passes boolean value
+ * Manages score while game is on!
+ */
+const scoreCount = (answer, text, text_color) => {
+  document.getElementById("score").innerHTML =
+    (text === text_color) === answer ? (score += 100) : (score -= 200);
+};
+
+/**
+ * Get current text of card1 and color of font card2
+ */
+const getCardValues = id => {
+  return document.getElementById(id);
+};
+
+/**
+ * Score count setting
+ */
+const _scoreHandling = answer => {
+  var color_text = getCardValues("color-text").innerHTML;
+  var color_font = getCardValues("color-font").style.color;
+  scoreCount(answer, color_text, color_font);
+  _setCardColorValues();
+};
+
+/**
+ * Key press score count
+ */
+const _keyPressHandle = answer => {
+  _scoreHandling(answer);
+};
+
+/**
+ * Debounce will restrict user click unlawfully
  */
 const debounce = (func, delay) => {
   let debounceTimer;
@@ -123,45 +157,22 @@ function getRandomColor() {
 }
 
 /**
- *
- * @param {Boolean} answer Event passes boolean value
- * Manages score while game is on!
- */
-const scoreCount = (answer, text, text_color) => {
-  document.getElementById("score").innerHTML =
-    (text === text_color) === answer ? (score += 100) : (score -= 200);
-};
-
-/**
- * Get current text of card1 and color of font card2
- */
-const getCardValues = id => {
-  return document.getElementById(id);
-};
-
-/**
- * Event listner for score counting
+ * Event listener for score counting
  */
 answerNo.addEventListener(
   "click",
   debounce(function() {
-    var color_text = getCardValues("color-text").innerHTML;
-    var color_font = getCardValues("color-font").style.color;
-    scoreCount(false, color_text, color_font);
-    _setCardColorValues();
+    _scoreHandling(false);
   }, 200)
 );
 
 /**
- * Event listner for score counting
+ * Event listener for score counting
  */
 answerYes.addEventListener(
   "click",
   debounce(function() {
-    var color_text = getCardValues("color-text").innerHTML;
-    var color_font = getCardValues("color-font").style.color;
-    scoreCount(true, color_text, color_font);
-    _setCardColorValues();
+    _scoreHandling(true);
   }, 200)
 );
 
@@ -203,8 +214,45 @@ function main() {
   highScoreTable();
 }
 
+var start = null;
+window.addEventListener("touchstart", function(event) {
+  if (event.touches.length === 1) {
+    //just one finger touched
+    start = event.touches.item(0).clientX;
+    console.log("here");
+    var offset = 10; //at least 100px are a swipe
+    if (start) {
+      //the only finger that hit the screen left it
+      var end = event.changedTouches.item(0).clientX;
+
+      if (end > start + offset) {
+        //a left -> right swipe
+        console.log("right");
+        alert("right swipe");
+      }
+      if (end < start - offset) {
+        //a right -> left swipe
+        console.log("left");
+        alert("left swipe");
+      }
+    }
+  } else {
+    //a second finger hit the screen, abort the touch
+    start = null;
+    console.log("there");
+  }
+});
+
 /**
  * Commands to manage what to do when!?
  */
 window.onloadstart = localStorageInit();
 window.onload = main();
+window.onkeydown = e => {
+  if (e.keyCode === 39) {
+    _keyPressHandle(true);
+  }
+  if (e.keyCode === 37) {
+    _keyPressHandle(false);
+  }
+};

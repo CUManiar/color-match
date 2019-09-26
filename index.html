@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
     />
 
     <link rel="icon" href="./favicon_io/favicon.ico" />
@@ -99,7 +99,11 @@
             </div>
             <div class="row justify-content-around">
               <button id="no-btn" class="btn btn-danger w-25 m-3">No</button>
-              <button id="yes-btn" class="btn btn-success w-25 m-3 float-right">
+              <button
+                id="yes-btn"
+                class="btn btn-success w-25 m-3 float-right"
+                onkeydown="keyCall()"
+              >
                 Yes
               </button>
             </div>

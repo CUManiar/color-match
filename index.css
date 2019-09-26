@@ -3,6 +3,8 @@
  * ${author} Chiragkumar Maniyar
  */
 body {
+  width: 100%;
+  overflow-x: hidden;
   background: #36d1dc; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
