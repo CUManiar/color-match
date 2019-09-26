@@ -7,7 +7,7 @@
 var colors = ["red", "blue", "green", "brown", "magenta", "violet"];
 var score = 0;
 var username = "";
-var game_time = 30;
+var game_time = 1130;
 
 // Elements list need to be interacted with
 var color_text = document.getElementById("color-text");
@@ -203,6 +203,51 @@ function localStorageInit() {
 }
 
 /**
+ * Key press scoring
+ */
+game_window.onkeydown = e => {
+  if (e.keyCode === 39) {
+    console.log("true");
+    _keyPressHandle(true);
+  }
+  if (e.keyCode === 37) {
+    console.log("false");
+    _keyPressHandle(false);
+  }
+};
+
+/**
+ * Swiping score handling
+ */
+var start = null;
+game_window.addEventListener("touchstart", function(event) {
+  if (event.touches.length === 1) {
+    //just one finger touched
+    start = event.touches.item(0).clientX;
+    console.log(start);
+  } else {
+    //a second finger hit the screen, abort the touch
+    start = null;
+    console.log("there");
+  }
+});
+
+game_window.addEventListener("touchend", function(event) {
+  var offset = 50; //at least 50px are a swipe
+  if (start) {
+    //the only finger that hit the screen left it
+    var end = event.changedTouches.item(0).clientX;
+    console.log(end);
+    if (end > start + offset) {
+      _scoreHandling(true); //Right swipe
+    }
+    if (end < start - offset) {
+      _scoreHandling(false); //Left swipe
+    }
+  }
+});
+
+/**
  * Everything starts from here!!!!!!
  */
 function main() {
@@ -214,45 +259,8 @@ function main() {
   highScoreTable();
 }
 
-var start = null;
-window.addEventListener("touchstart", function(event) {
-  if (event.touches.length === 1) {
-    //just one finger touched
-    start = event.touches.item(0).clientX;
-    console.log("here");
-    var offset = 10; //at least 100px are a swipe
-    if (start) {
-      //the only finger that hit the screen left it
-      var end = event.changedTouches.item(0).clientX;
-
-      if (end > start + offset) {
-        //a left -> right swipe
-        console.log("right");
-        alert("right swipe");
-      }
-      if (end < start - offset) {
-        //a right -> left swipe
-        console.log("left");
-        alert("left swipe");
-      }
-    }
-  } else {
-    //a second finger hit the screen, abort the touch
-    start = null;
-    console.log("there");
-  }
-});
-
 /**
  * Commands to manage what to do when!?
  */
 window.onloadstart = localStorageInit();
 window.onload = main();
-window.onkeydown = e => {
-  if (e.keyCode === 39) {
-    _keyPressHandle(true);
-  }
-  if (e.keyCode === 37) {
-    _keyPressHandle(false);
-  }
-};
