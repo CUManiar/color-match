@@ -7,7 +7,7 @@
 var colors = ["red", "blue", "green", "brown", "magenta", "violet"];
 var score = 0;
 var username = "";
-var game_time = 1130;
+var game_time = 30;
 
 // Elements list need to be interacted with
 var color_text = document.getElementById("color-text");
